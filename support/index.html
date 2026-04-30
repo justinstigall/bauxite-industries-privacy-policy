@@ -1,140 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Support – Bayou City Watch</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: #f5f7fa;
-      color: #1a1a1a;
-      line-height: 1.7;
-    }
-    header {
-      background: #1b2e4a;
-      color: #fff;
-      padding: 40px 24px 32px;
-      text-align: center;
-    }
-    header h1 { font-size: 1.8rem; font-weight: 700; }
-    header p  { margin-top: 6px; opacity: 0.75; font-size: 0.95rem; }
-    main {
-      max-width: 720px;
-      margin: 48px auto;
-      padding: 0 24px 80px;
-    }
-    h2 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #1b2e4a;
-      margin-top: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-    p { margin-bottom: 0.75rem; }
-    .faq { background: #fff; border-radius: 10px; padding: 28px 32px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
-    .faq + .faq { margin-top: 16px; }
-    a { color: #2980b9; }
-    .contact-box {
-      margin-top: 48px;
-      background: #1b2e4a;
-      color: #fff;
-      border-radius: 10px;
-      padding: 32px;
-      text-align: center;
-    }
-    .contact-box h2 { color: #fff; margin-top: 0; }
-    .contact-box p  { opacity: 0.8; }
-    .contact-box a  { color: #7ec8e3; }
-  </style>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Support – Bayou City Watch</title>
+	<style>
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+			background: #f5f7fa;
+			color: #1a1a1a;
+			line-height: 1.7;
+		}
+
+		header {
+			background: #1b2e4a;
+			color: #fff;
+			padding: 40px 24px 32px;
+			text-align: center;
+		}
+
+		header h1 {
+			font-size: 1.8rem;
+			font-weight: 700;
+		}
+
+		header p {
+			margin-top: 6px;
+			opacity: 0.75;
+			font-size: 0.95rem;
+		}
+
+		main {
+			max-width: 720px;
+			margin: 48px auto;
+			padding: 0 24px 80px;
+		}
+
+		h2 {
+			font-size: 1.1rem;
+			font-weight: 700;
+			color: #1b2e4a;
+			margin-top: 2.5rem;
+			margin-bottom: 0.5rem;
+		}
+
+		p {
+			margin-bottom: 0.75rem;
+		}
+
+		.faq {
+			background: #fff;
+			border-radius: 10px;
+			padding: 28px 32px;
+			box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+		}
+
+		.faq+.faq {
+			margin-top: 16px;
+		}
+
+		a {
+			color: #2980b9;
+		}
+
+		.contact-box {
+			margin-top: 48px;
+			background: #1b2e4a;
+			color: #fff;
+			border-radius: 10px;
+			padding: 32px;
+			text-align: center;
+		}
+
+		.contact-box h2 {
+			color: #fff;
+			margin-top: 0;
+		}
+
+		.contact-box p {
+			opacity: 0.8;
+		}
+
+		.contact-box a {
+			color: #7ec8e3;
+		}
+	</style>
 </head>
+
 <body>
 
-  <header>
-    <h1>Bayou City Watch — Support</h1>
-    <p>Real-time Houston public-safety incidents</p>
-  </header>
+	<header>
+		<h1>Bayou City Watch — Support</h1>
+		<p>Real-time Houston public-safety incidents</p>
+	</header>
 
-  <main>
+	<main>
 
-    <div class="faq">
-      <h2>The map isn't showing any incidents</h2>
-      <p>
-        Incident data comes directly from the City of Houston's public feed.
-        If the feed is temporarily unavailable the app will display a banner
-        noting the data may be stale. Pull down to refresh or wait a few minutes
-        and try again. If the problem persists, the City of Houston feed itself
-        may be down.
-      </p>
-    </div>
+		<div class="faq">
+			<h2>The map isn't showing any incidents</h2>
+			<p>
+				Incident data comes directly from the City of Houston's public feed.
+				If the feed is temporarily unavailable the app will display a banner
+				noting the data may be stale. Pull down to refresh or wait a few minutes
+				and try again. If the problem persists, the City of Houston feed itself
+				may be down.
+			</p>
+		</div>
 
-    <div class="faq">
-      <h2>How current is the data?</h2>
-      <p>
-        The app refreshes automatically every five minutes when in use. The
-        timestamp shown in the header tells you when the data was last fetched.
-        A yellow "stale cache" banner appears if the live feed could not be
-        reached and an older snapshot is being displayed.
-      </p>
-    </div>
+		<div class="faq">
+			<h2>How current is the data?</h2>
+			<p>
+				The app refreshes automatically every five minutes when in use. The
+				timestamp shown in the header tells you when the data was last fetched.
+				A yellow "stale cache" banner appears if the live feed could not be
+				reached and an older snapshot is being displayed.
+			</p>
+		</div>
 
-    <div class="faq">
-      <h2>A pin appears to be in the wrong location</h2>
-      <p>
-        Incident locations are geocoded from the addresses published by the City
-        of Houston. When an exact street match is not available, the app falls
-        back to a Key Map grid reference, which places the pin at the center of
-        the nearest map grid square rather than the precise address. This is a
-        limitation of the source data.
-      </p>
-    </div>
+		<div class="faq">
+			<h2>A pin appears to be in the wrong location</h2>
+			<p>
+				Incident locations are geocoded from the addresses published by the City
+				of Houston. When an exact street match is not available, the app falls
+				back to a Key Map grid reference, which places the pin at the center of
+				the nearest map grid square rather than the precise address. This is a
+				limitation of the source data.
+			</p>
+		</div>
 
-    <div class="faq">
-      <h2>Can I filter by agency?</h2>
-      <p>
-        Yes. Use the filter buttons in the header to show All incidents, Fire
-        only (HFD), or Police only (HPD).
-      </p>
-    </div>
+		<div class="faq">
+			<h2>Can I filter by agency?</h2>
+			<p>
+				Yes. Use the filter buttons in the header to show All incidents, Fire
+				only (HFD), or Police only (HPD).
+			</p>
+		</div>
 
-    <div class="faq">
-      <h2>Does the app use my location?</h2>
-      <p>
-        No. Bayou City Watch does not request or use your device location. It
-        shows a city-wide view of all active incidents.
-      </p>
-    </div>
+		<div class="faq">
+			<h2>Does the app use my location?</h2>
+			<p>
+				No. Bayou City Watch does not request or use your device location. It
+				shows a city-wide view of all active incidents.
+			</p>
+		</div>
 
-    <div class="faq">
-      <h2>Does the app collect any personal data?</h2>
-      <p>
-        No. The app collects no personal information and uses no tracking or
-        analytics. See our <a href="../index.html">Privacy Policy</a> for full
-        details.
-      </p>
-    </div>
+		<div class="faq">
+			<h2>Does the app collect any personal data?</h2>
+			<p>
+				No. The app collects no personal information and uses no tracking or
+				analytics. See our <a href="../index.html">Privacy Policy</a> for full
+				details.
+			</p>
+		</div>
 
-    <div class="faq">
-      <h2>Why is an incident type showing as an unfamiliar code?</h2>
-      <p>
-        Incident type codes and descriptions are supplied verbatim from the City
-        of Houston dispatch system. Some codes are department-internal shorthand.
-        Searching the code alongside "HFD" or "HPD" will usually identify it.
-      </p>
-    </div>
+		<div class="faq">
+			<h2>Why is an incident type showing as an unfamiliar code?</h2>
+			<p>
+				Incident type codes and descriptions are supplied verbatim from the City
+				of Houston dispatch system. Some codes are department-internal shorthand.
+				Searching the code alongside "HFD" or "HPD" will usually identify it.
+			</p>
+		</div>
 
-    <div class="contact-box">
-      <h2>Still need help?</h2>
-      <p>Open an issue on our GitHub repository and we'll get back to you.</p>
-      <p style="margin-top:12px;">
-        <a href="https://github.com/bauxiteindustries/bauxite-industries-privacy-policy/issues">
-          Open a Support Issue on GitHub &rarr;
-        </a>
-      </p>
-    </div>
+		<div class="contact-box">
+			<h2>Still need help?</h2>
+			<p>Open an issue on our GitHub repository and we'll get back to you.</p>
+			<p style="margin-top:12px;">
+				<a href="https://github.com/bauxiteindustries/bauxite-industries-privacy-policy/issues">
+					Open a Support Issue on GitHub &rarr;
+				</a>
+			</p>
+		</div>
 
-  </main>
+	</main>
 
 </body>
+
 </html>
