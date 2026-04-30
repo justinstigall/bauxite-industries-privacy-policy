@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bayou City Watch – Live Houston Incident Map</title>
+  <meta name="description" content="See active Houston fire and police incidents on a live interactive map. Free, no account required, no tracking." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #1b2e4a;
+      --navy-dark: #102033;
+      --fire:      #c0392b;
+      --police:    #2980b9;
+      --other:     #27ae60;
+      --amber:     #e67e22;
+      --text:      #1a1a1a;
+      --muted:     #555;
+      --bg:        #f5f7fa;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── Hero ─────────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(160deg, var(--navy-dark) 0%, var(--navy) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 80px 24px 72px;
+    }
+    .hero .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7ec8e3;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      opacity: 0.82;
+      max-width: 540px;
+      margin: 0 auto 36px;
+    }
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .badge-row a img {
+      height: 52px;
+    }
+
+    /* ── Section wrapper ──────────────────────────────────────────── */
+    .section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 72px 24px;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--police);
+      margin-bottom: 12px;
+    }
+    .section h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+      color: var(--navy);
+    }
+    .section > p {
+      color: var(--muted);
+      max-width: 620px;
+      font-size: 1.05rem;
+    }
+
+    /* ── Feature grid ─────────────────────────────────────────────── */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .feature-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.07);
+    }
+    .feature-card .icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+    .feature-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+    .feature-card p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── Agency legend ────────────────────────────────────────────── */
+    .divider { background: #e8ecf0; }
+    .legend {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .dot {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot.fire   { background: var(--fire); }
+    .dot.police { background: var(--police); }
+    .dot.other  { background: var(--other); }
+
+    /* ── Privacy strip ────────────────────────────────────────────── */
+    .privacy-strip {
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+      padding: 60px 24px;
+    }
+    .privacy-strip h2 { font-size: 1.6rem; margin-bottom: 12px; }
+    .privacy-strip p  { opacity: 0.75; max-width: 500px; margin: 0 auto; }
+
+    /* ── Footer ───────────────────────────────────────────────────── */
+    footer {
+      background: var(--navy-dark);
+      color: rgba(255,255,255,.55);
+      text-align: center;
+      font-size: 0.85rem;
+      padding: 32px 24px;
+    }
+    footer a { color: rgba(255,255,255,.7); text-decoration: none; margin: 0 10px; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="eyebrow">Bauxite Industries</p>
+    <h1>Bayou City Watch</h1>
+    <p>
+      Live Houston fire &amp; police incidents on an interactive map —
+      free, no account, no tracking.
+    </p>
+    <div class="badge-row">
+      <!-- Replace href with your App Store link once live -->
+      <a href="#" aria-label="Download on the App Store">
+        <img
+          src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+          alt="Download on the App Store"
+        />
+      </a>
+    </div>
+  </section>
+
+  <!-- What it does -->
+  <div class="section">
+    <p class="section-label">About</p>
+    <h2>Know what's happening in Houston right now</h2>
+    <p>
+      Bayou City Watch pulls active incident data directly from the City of Houston
+      and pins every active call on a smooth, interactive map. Whether you heard
+      sirens on your street or want to stay aware of your neighborhood, the
+      information you need is a glance away.
+    </p>
+
+    <div class="features">
+      <div class="feature-card">
+        <div class="icon">🔴</div>
+        <h3>Live Fire Incidents</h3>
+        <p>HFD active calls with alarm escalation levels and every dispatched unit listed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🔵</div>
+        <h3>Live Police Incidents</h3>
+        <p>HPD active calls plotted by address with cross-street and call time detail.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🗺️</div>
+        <h3>Offline-capable Map</h3>
+        <p>Vector map tiles are bundled with the app — no third-party map account needed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">📍</div>
+        <h3>Precise Geocoding</h3>
+        <p>Incidents are placed at actual street addresses, not just city-block centers.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🔄</div>
+        <h3>Auto-refresh</h3>
+        <p>Feed refreshes every five minutes. A banner alerts you if the data is stale.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🔍</div>
+        <h3>Filter by Agency</h3>
+        <p>Switch instantly between All, Fire Only, and Police Only with one tap.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Agency colors -->
+  <div class="divider">
+    <div class="section">
+      <p class="section-label">Color Guide</p>
+      <h2>Color-coded at a glance</h2>
+      <p>Every pin on the map is color-coded so you know instantly which agency is responding.</p>
+      <div class="legend">
+        <div class="legend-item"><span class="dot fire"></span> Houston Fire Department (HFD)</div>
+        <div class="legend-item"><span class="dot police"></span> Houston Police Department (HPD)</div>
+        <div class="legend-item"><span class="dot other"></span> Other City Agencies</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy -->
+  <div class="privacy-strip">
+    <h2>Your privacy is our default</h2>
+    <p>
+      Bayou City Watch collects zero personal data. No account, no sign-in,
+      no tracking, no analytics. Every incident shown is already public
+      information published by the City of Houston.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      &copy; 2026 Bauxite Industries &nbsp;|&nbsp;
+      <a href="index.html">Privacy Policy</a>
+      <a href="support/">Support</a>
+    </p>
+  </footer>
+
+</body>
+</html>
