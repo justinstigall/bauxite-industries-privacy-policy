@@ -4,9 +4,11 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Bayou City Watch – Live Houston Incident Map</title>
+	<title>Bayou City Watch - Live Houston Incident Map</title>
 	<meta name="description"
-		content="See active Houston fire and police incidents on a live interactive map. Free, no account required, no tracking." />
+		content="See live Houston fire and police incidents on a fast interactive map. Available on iOS, Android, and as a free web app." />
+	<link rel="icon" href="assets/app-icon.png" />
+	<link rel="apple-touch-icon" href="assets/app-icon.png" />
 	<style>
 		*,
 		*::before,
@@ -19,6 +21,7 @@
 		:root {
 			--navy: #1b2e4a;
 			--navy-dark: #102033;
+			--ink: #071421;
 			--fire: #c0392b;
 			--police: #2980b9;
 			--other: #27ae60;
@@ -26,6 +29,7 @@
 			--text: #1a1a1a;
 			--muted: #555;
 			--bg: #f5f7fa;
+			--line: #dbe3ea;
 		}
 
 		body {
@@ -35,51 +39,135 @@
 			line-height: 1.6;
 		}
 
-		/* ── Hero ─────────────────────────────────────────────────────── */
+		/* Hero */
 		.hero {
-			background: linear-gradient(160deg, var(--navy-dark) 0%, var(--navy) 100%);
+			position: relative;
+			overflow: hidden;
+			background:
+				linear-gradient(90deg, rgba(7, 20, 33, 0.94), rgba(7, 20, 33, 0.76)),
+				url("assets/screenshots/map-overview.jpg") center/cover;
 			color: #fff;
-			text-align: center;
-			padding: 80px 24px 72px;
+			padding: 78px 24px 58px;
+			min-height: 92vh;
+			display: flex;
+			align-items: center;
+		}
+
+		.hero::after {
+			content: "";
+			position: absolute;
+			inset: auto 0 0;
+			height: 180px;
+			background: linear-gradient(0deg, var(--bg), rgba(245, 247, 250, 0));
+			pointer-events: none;
+		}
+
+		.hero-inner {
+			position: relative;
+			z-index: 1;
+			width: min(1120px, 100%);
+			margin: 0 auto;
 		}
 
 		.hero .eyebrow {
 			font-size: 0.75rem;
 			font-weight: 700;
-			letter-spacing: 0.12em;
+			letter-spacing: 0.1em;
 			text-transform: uppercase;
-			color: #7ec8e3;
-			margin-bottom: 16px;
+			color: #9bd7ff;
+			margin: 0;
 		}
 
-		.hero h1 {
-			font-size: clamp(2rem, 5vw, 3.2rem);
-			font-weight: 800;
-			line-height: 1.15;
+		.app-lockup {
+			display: flex;
+			align-items: center;
+			gap: 14px;
 			margin-bottom: 20px;
 		}
 
-		.hero p {
-			font-size: 1.15rem;
-			opacity: 0.82;
-			max-width: 540px;
-			margin: 0 auto 36px;
+		.app-icon {
+			width: 72px;
+			height: 72px;
+			border-radius: 18px;
+			box-shadow: 0 16px 34px rgba(0, 0, 0, 0.32);
+			flex-shrink: 0;
 		}
 
-		.badge-row {
+		.hero h1 {
+			font-size: clamp(2.7rem, 8vw, 5.8rem);
+			font-weight: 900;
+			line-height: 0.98;
+			max-width: 780px;
+			margin-bottom: 24px;
+		}
+
+		.hero p {
+			font-size: clamp(1.12rem, 2.2vw, 1.35rem);
+			opacity: 0.9;
+			max-width: 620px;
+			margin-bottom: 34px;
+		}
+
+		.hero-actions {
 			display: flex;
-			justify-content: center;
+			align-items: center;
 			gap: 16px;
 			flex-wrap: wrap;
 		}
 
-		.badge-row a img {
-			height: 52px;
+		.web-cta {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 184px;
+			height: 54px;
+			padding: 0 16px;
+			border: 1px solid rgba(255, 255, 255, 0.34);
+			border-radius: 6px;
+			background: rgba(255, 255, 255, 0.12);
+			color: #fff;
+			font-size: 0.84rem;
+			font-weight: 800;
+			line-height: 1.15;
+			text-align: center;
+			text-decoration: none;
+			backdrop-filter: blur(12px);
 		}
 
-		/* ── Section wrapper ──────────────────────────────────────────── */
+		.web-cta:hover {
+			background: rgba(255, 255, 255, 0.2);
+		}
+
+		.badge-row {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			flex-wrap: wrap;
+		}
+
+		.badge-row a img {
+			display: block;
+			max-width: 100%;
+			height: 100%;
+			width: auto;
+		}
+
+		.badge-row a {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 184px;
+			height: 54px;
+			padding: 5px 12px;
+			border: 1px solid rgba(255, 255, 255, 0.18);
+			border-radius: 6px;
+			background: #050505;
+			box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+		}
+
+		/* Section wrapper */
 		.section {
-			max-width: 900px;
+			max-width: 1120px;
 			margin: 0 auto;
 			padding: 72px 24px;
 		}
@@ -106,7 +194,57 @@
 			font-size: 1.05rem;
 		}
 
-		/* ── Feature grid ─────────────────────────────────────────────── */
+		.section-head {
+			display: flex;
+			justify-content: space-between;
+			gap: 32px;
+			align-items: end;
+			margin-bottom: 34px;
+		}
+
+		.section-head p {
+			color: var(--muted);
+			max-width: 520px;
+		}
+
+		/* Screenshots */
+		.screenshots {
+			display: block;
+		}
+
+		.phone-strip {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 20px;
+			align-items: start;
+		}
+
+		.screenshot-frame {
+			position: relative;
+			overflow: hidden;
+			background: #fff;
+			border: 1px solid var(--line);
+			box-shadow: 0 12px 28px rgba(16, 32, 51, 0.12);
+		}
+
+		.screenshot-frame.phone {
+			border-radius: 24px;
+			padding: 8px;
+		}
+
+		.screenshot-frame img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.screenshot-frame.phone img {
+			border-radius: 17px;
+			aspect-ratio: 600 / 1300;
+		}
+
+		/* Feature grid */
 		.features {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -119,11 +257,6 @@
 			border-radius: 12px;
 			padding: 28px 24px;
 			box-shadow: 0 1px 4px rgba(0, 0, 0, .07);
-		}
-
-		.feature-card .icon {
-			font-size: 2rem;
-			margin-bottom: 14px;
 		}
 
 		.feature-card h3 {
@@ -139,7 +272,7 @@
 			line-height: 1.55;
 		}
 
-		/* ── Agency legend ────────────────────────────────────────────── */
+		/* Agency legend */
 		.divider {
 			background: #e8ecf0;
 		}
@@ -178,7 +311,47 @@
 			background: var(--other);
 		}
 
-		/* ── Privacy strip ────────────────────────────────────────────── */
+		.web-strip {
+			background: #fff;
+			border-top: 1px solid var(--line);
+			border-bottom: 1px solid var(--line);
+		}
+
+		.web-strip-inner {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 28px;
+		}
+
+		.web-strip h2 {
+			margin-bottom: 8px;
+		}
+
+		.web-strip p {
+			color: var(--muted);
+			max-width: 650px;
+		}
+
+		.web-link {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 46px;
+			padding: 0 18px;
+			border-radius: 6px;
+			background: var(--navy);
+			color: #fff;
+			font-weight: 800;
+			text-decoration: none;
+			white-space: nowrap;
+		}
+
+		.web-link:hover {
+			background: var(--navy-dark);
+		}
+
+		/* Privacy strip */
 		.privacy-strip {
 			background: var(--navy);
 			color: #fff;
@@ -197,7 +370,7 @@
 			margin: 0 auto;
 		}
 
-		/* ── Footer ───────────────────────────────────────────────────── */
+		/* Footer */
 		footer {
 			background: var(--navy-dark);
 			color: rgba(255, 255, 255, .55);
@@ -215,6 +388,32 @@
 		footer a:hover {
 			text-decoration: underline;
 		}
+
+		@media (max-width: 760px) {
+			.hero {
+				min-height: auto;
+				padding: 64px 20px 48px;
+			}
+
+			.hero-actions,
+			.badge-row,
+			.web-strip-inner,
+			.section-head {
+				align-items: flex-start;
+				flex-direction: column;
+			}
+
+			.screenshots {
+				grid-template-columns: 1fr;
+			}
+
+			.phone-strip {
+				overflow-x: auto;
+				grid-template-columns: repeat(3, minmax(165px, 1fr));
+				padding-bottom: 8px;
+			}
+
+		}
 	</style>
 </head>
 
@@ -222,67 +421,107 @@
 
 	<!-- Hero -->
 	<section class="hero">
-		<p class="eyebrow">Bauxite Industries</p>
-		<h1>Bayou City Watch</h1>
-		<p>
-			Live Houston fire &amp; police incidents on an interactive map —
-			free, no account, no tracking.
-		</p>
-		<div class="badge-row">
-			<a href="https://apps.apple.com/us/app/bayou-city-watch/id6763953630" aria-label="Download on the App Store">
-				<img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-					alt="Download on the App Store" />
-			</a>
-			<a href="https://play.google.com/store/apps/details?id=com.bauxiteindustries.bayoucitywatch"
-				aria-label="Get it on Google Play">
-				<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-					alt="Get it on Google Play" />
-			</a>
+		<div class="hero-inner">
+			<div class="app-lockup">
+				<img class="app-icon" src="assets/app-icon.png" alt="Bayou City Watch app icon" />
+				<p class="eyebrow">Live Houston incident awareness</p>
+			</div>
+			<h1>Know why the sirens are there.</h1>
+			<p>
+				Bayou City Watch turns Houston's public fire and police calls into a fast map you can read in seconds.
+				Get the native app for iOS or Android, or use the free web version from any browser.
+			</p>
+			<div class="hero-actions">
+				<div class="badge-row">
+					<a href="https://apps.apple.com/us/app/bayou-city-watch/id6763953630" aria-label="Download on the App Store">
+						<img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+							alt="Download on the App Store" />
+					</a>
+					<a href="https://play.google.com/store/apps/details?id=com.bauxiteindustries.bayoucitywatch"
+						aria-label="Get it on Google Play">
+						<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+							alt="Get it on Google Play" />
+					</a>
+				</div>
+				<a class="web-cta" href="https://bayoucity.watch/">Use the free web version</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Screenshots -->
+	<section class="section">
+		<div class="section-head">
+			<div>
+				<p class="section-label">Screenshots</p>
+				<h2>Built for quick answers, not endless searching</h2>
+			</div>
+			<p>A closer look at the live map, incident drawer, and filtered incident list.</p>
+		</div>
+		<div class="screenshots" aria-label="Bayou City Watch app screenshots">
+			<div class="phone-strip">
+				<div class="screenshot-frame phone">
+					<img loading="lazy" src="assets/screenshots/map-overview.jpg" alt="Bayou City Watch map overview screenshot" />
+				</div>
+				<div class="screenshot-frame phone">
+					<img loading="lazy" src="assets/screenshots/incident-list.jpg" alt="Bayou City Watch incident list screenshot" />
+				</div>
+				<div class="screenshot-frame phone">
+					<img loading="lazy" src="assets/screenshots/incident-detail.jpg" alt="Bayou City Watch incident detail screenshot" />
+				</div>
+			</div>
 		</div>
 	</section>
 
 	<!-- What it does -->
 	<div class="section">
-		<p class="section-label">About</p>
-		<h2>Know what's happening in Houston right now</h2>
+		<p class="section-label">What it does</p>
+		<h2>A cleaner way to read Houston's live incident feed</h2>
 		<p>
-			Bayou City Watch pulls active incident data directly from the City of Houston
-			and pins every active call on a smooth, interactive map. Whether you heard
-			sirens on your street or want to stay aware of your neighborhood, the
-			information you need is a glance away.
+			Bayou City Watch pulls active public-safety calls from the City of Houston and plots them on a
+			map with filters, incident details, and fresh timestamps. It is built for neighbors, journalists,
+			weather watchers, and anyone who wants local context without digging through city pages.
 		</p>
 
 		<div class="features">
 			<div class="feature-card">
-				<div class="icon">🔴</div>
-				<h3>Live Fire Incidents</h3>
-				<p>HFD active calls with alarm escalation levels and every dispatched unit listed.</p>
+				<h3>Fire calls, fast</h3>
+				<p>HFD active calls with alarm levels, call times, addresses, cross streets, and dispatched units.</p>
 			</div>
 			<div class="feature-card">
-				<div class="icon">🔵</div>
-				<h3>Live Police Incidents</h3>
-				<p>HPD active calls plotted by address with cross-street and call time detail.</p>
+				<h3>Police calls in context</h3>
+				<p>HPD active calls plotted on the map with the detail you need to understand the scene nearby.</p>
 			</div>
 			<div class="feature-card">
-				<div class="icon">🗺️</div>
-				<h3>Offline-capable Map</h3>
-				<p>Vector map tiles are bundled with the app — no third-party map account needed.</p>
+				<h3>Map-first view</h3>
+				<p>Open straight to Houston and scan active incidents by location instead of reading a raw table.</p>
 			</div>
 			<div class="feature-card">
-				<div class="icon">📍</div>
-				<h3>Precise Geocoding</h3>
+				<h3>Precise geocoding</h3>
 				<p>Incidents are placed at actual street addresses, not just city-block centers.</p>
 			</div>
 			<div class="feature-card">
-				<div class="icon">🔄</div>
 				<h3>Auto-refresh</h3>
 				<p>Feed refreshes every five minutes. A banner alerts you if the data is stale.</p>
 			</div>
 			<div class="feature-card">
-				<div class="icon">🔍</div>
-				<h3>Filter by Agency</h3>
+				<h3>Filter by agency</h3>
 				<p>Switch instantly between All, Fire Only, and Police Only with one tap.</p>
 			</div>
+		</div>
+	</div>
+
+	<!-- Web app -->
+	<div class="web-strip">
+		<div class="section web-strip-inner">
+			<div>
+				<p class="section-label">Free web version</p>
+				<h2>Need it now? Open it in your browser.</h2>
+				<p>
+					The web version is free and works on desktop, tablet, and mobile. Use it when you are at a
+					computer, sharing a link, or just want to check the map without installing anything.
+				</p>
+			</div>
+			<a class="web-link" href="https://bayoucity.watch/">Launch Bayou City Watch Web</a>
 		</div>
 	</div>
 
@@ -302,7 +541,7 @@
 
 	<!-- Privacy -->
 	<div class="privacy-strip">
-		<h2>Your privacy is our default</h2>
+		<h2>Public data in. No personal data out.</h2>
 		<p>
 			Bayou City Watch collects zero personal data. No account, no sign-in,
 			no tracking, no analytics. Every incident shown is already public
