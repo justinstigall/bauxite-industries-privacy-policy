@@ -115,6 +115,7 @@
 			flex-wrap: wrap;
 		}
 
+		.store-link,
 		.web-cta {
 			display: inline-flex;
 			align-items: center;
@@ -122,20 +123,55 @@
 			width: 184px;
 			height: 54px;
 			padding: 0 16px;
-			border: 1px solid rgba(255, 255, 255, 0.34);
-			border-radius: 6px;
-			background: rgba(255, 255, 255, 0.12);
+			border-radius: 8px;
 			color: #fff;
-			font-size: 0.84rem;
-			font-weight: 800;
-			line-height: 1.15;
 			text-align: center;
 			text-decoration: none;
+			transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+		}
+
+		.store-link {
+			border: 1px solid rgba(255, 255, 255, 0.16);
+			background: #050505;
+			box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+		}
+
+		.web-cta {
+			border: 1px solid rgba(255, 255, 255, 0.34);
+			background: rgba(255, 255, 255, 0.12);
 			backdrop-filter: blur(12px);
+		}
+
+		.store-link:hover,
+		.web-cta:hover {
+			border-color: rgba(255, 255, 255, 0.42);
+			transform: translateY(-1px);
+		}
+
+		.store-link:hover {
+			background: #151515;
 		}
 
 		.web-cta:hover {
 			background: rgba(255, 255, 255, 0.2);
+		}
+
+		.cta-copy {
+			display: grid;
+			gap: 2px;
+			line-height: 1.05;
+		}
+
+		.cta-kicker {
+			font-size: 0.66rem;
+			font-weight: 700;
+			color: rgba(255, 255, 255, 0.74);
+		}
+
+		.cta-label {
+			font-size: 1rem;
+			font-weight: 850;
+			color: #fff;
 		}
 
 		.badge-row {
@@ -143,26 +179,6 @@
 			align-items: center;
 			gap: 12px;
 			flex-wrap: wrap;
-		}
-
-		.badge-row a img {
-			display: block;
-			max-width: 100%;
-			height: 100%;
-			width: auto;
-		}
-
-		.badge-row a {
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			width: 184px;
-			height: 54px;
-			padding: 5px 12px;
-			border: 1px solid rgba(255, 255, 255, 0.18);
-			border-radius: 6px;
-			background: #050505;
-			box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
 		}
 
 		/* Section wrapper */
@@ -433,17 +449,27 @@
 			</p>
 			<div class="hero-actions">
 				<div class="badge-row">
-					<a href="https://apps.apple.com/us/app/bayou-city-watch/id6763953630" aria-label="Download on the App Store">
-						<img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-							alt="Download on the App Store" />
+					<a class="store-link" href="https://apps.apple.com/us/app/bayou-city-watch/id6763953630"
+						aria-label="Download on the App Store">
+						<span class="cta-copy">
+							<span class="cta-kicker">Download on</span>
+							<span class="cta-label">App Store</span>
+						</span>
 					</a>
-					<a href="https://play.google.com/store/apps/details?id=com.bauxiteindustries.bayoucitywatch"
+					<a class="store-link" href="https://play.google.com/store/apps/details?id=com.bauxiteindustries.bayoucitywatch"
 						aria-label="Get it on Google Play">
-						<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-							alt="Get it on Google Play" />
+						<span class="cta-copy">
+							<span class="cta-kicker">Get it on</span>
+							<span class="cta-label">Google Play</span>
+						</span>
 					</a>
 				</div>
-				<a class="web-cta" href="https://bayoucity.watch/">Use the free web version</a>
+				<a class="web-cta" href="https://bayoucity.watch/" aria-label="Use the free web version">
+					<span class="cta-copy">
+						<span class="cta-kicker">Use the free</span>
+						<span class="cta-label">Web version</span>
+					</span>
+				</a>
 			</div>
 		</div>
 	</section>
